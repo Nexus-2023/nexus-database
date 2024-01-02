@@ -7,21 +7,32 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
+ 
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  
+ 
+}
+
+table, th, td {
+  border: 2px solid #242222;
+  padding: 8px 8px 8px 8px;
+  
+  text-align: center;
+}
+
+th {
+  background-color: #242222;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+td {
+  font-size: 14px;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
