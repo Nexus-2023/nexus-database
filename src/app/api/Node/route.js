@@ -15,8 +15,8 @@ export async function GET(req, res) {
   await client.connect()
 
   try {
-    const result = await client.query("SELECT * FROM VALIDATORS;")
-
+    const result = await client.query("SELECT * FROM NODEOPERATORS;")
+    console.log("node result ", result)
     return NextResponse.json({ data: result.rows }, { status: 200 })
   } catch (error) {
     console.error("Error fetching data:", error)
@@ -29,6 +29,4 @@ export async function GET(req, res) {
   }
 }
 
-// CREATE TABLE Validators ( public_key TEXT PRIMARY KEY, validator_index INTEGER, cluster_id INTEGER, balance INTEGER, status TEXT, last_update_time TIMESTAMP, score INTEGER, rollupName TEXT );
-
-// INSERT INTO Validators ( public_key, validator_index, cluster_id,  balance, status, last_update_time, score, rollupName  ) VALUES ( '0xb00b966e25f49148693bec0c6cf19f325fc42f118db1ce0ecbb70fbc607dc2e0f238b5c7011cba1e02326e5b55509da0', 645904, 1,   32002907444, 'active_ongoing', NOW(), 89, 'PlaceholderRollup'  );
+// INSERT INTO NodeOperators ( name, public_key, validator_count, score, last_update_time, node_operator_id, cluster_id ) VALUES ( 'Node Operator 1', '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef', 10, 85, NOW(), 1, 1 );

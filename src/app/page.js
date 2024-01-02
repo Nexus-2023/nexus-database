@@ -1,33 +1,43 @@
 import Image from "next/image"
-import { ValidatorTable } from "@/components/tables"
-async function getValidators() {
-  try {
-    const response = await fetch("http://localhost:3000/api/Validators", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-
-    const result = await response.json()
-
-    return result
-  } catch (e) {
-    console.log("response error ", e)
-  }
-}
+import {
+  ValidatorTable,
+  BlocksTable,
+  NodeOperatorsTable,
+} from "@/components/tables"
+import { getValidators, getBlocks, getNodeOperators } from "@/utils/apiCalls"
 
 export default async function Home() {
-  const result = await getValidators()
-  console.log(" result", result.data)
+  const validatorResult = await getValidators()
+  const blocksResult = await getBlocks()
+  const nodeResult = await getNodeOperators()
+  console.log(" validatorResult", validatorResult.data)
+  console.log("  blocksResult", blocksResult)
+  console.log(" nodeResult", nodeResult)
+
   return (
     <>
-      {result ? (
+      {validatorResult ? (
         <>
-          <ValidatorTable list={result.data} />
+          <ValidatorTable list={validatorResult.data} />
         </>
       ) : (
-        <>Fetching Data ...</>
+        <>Fetching Validators ...</>
+      )}
+
+      {blocksResult ? (
+        <>
+          <BlocksTable list={blocksResult.data} />
+        </>
+      ) : (
+        <>Fetching BlockData ...</>
+      )}
+
+      {nodeResult ? (
+        <>
+          <NodeOperatorsTable list={nodeResult.data} />
+        </>
+      ) : (
+        <>Fetching nodeOperator Data ...</>
       )}
     </>
   )
