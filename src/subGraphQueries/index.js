@@ -56,6 +56,38 @@ const GET_ALL_ROLLUP = gql`
   }
 `
 
+const GET_ALL_VALIDATORS = gql`
+  {
+    validators {
+      clusterId
+      id
+      rollup
+      status
+    }
+  }
+`
+
+const GET_ALL_NODE_OPERATORS = gql`
+  {
+    nodeOperators {
+      id
+      ip
+      name
+      pubkey
+    }
+  }
+`
+
+const GET_ALL_CLUSTERS = gql`
+  {
+    clusters {
+      id
+      operatorIds
+      ssvFeePaid
+    }
+  }
+`
+
 const query = gql`
   query Now {
     rollups {
@@ -72,4 +104,10 @@ const query = gql`
   }
 `
 // const { data } = await getClient().query({ query })
-export { GET_ALL_DATA, GET_ALL_ROLLUP }
+export {
+  GET_ALL_DATA,
+  GET_ALL_ROLLUP,
+  GET_ALL_CLUSTERS,
+  GET_ALL_VALIDATORS,
+  GET_ALL_NODE_OPERATORS,
+}

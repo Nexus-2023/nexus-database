@@ -11,8 +11,8 @@ export default async function Home() {
   const blocksResult = await getBlocks()
   const nodeResult = await getNodeOperators()
   console.log(" validatorResult", validatorResult.data)
-  console.log("  blocksResult", blocksResult)
-  console.log(" nodeResult", nodeResult)
+  // console.log("  blocksResult", blocksResult)
+  // console.log(" nodeResult", nodeResult)
 
   return (
     <>
