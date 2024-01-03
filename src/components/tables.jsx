@@ -89,7 +89,7 @@ const NodeOperatorsTable = ({ list }) => {
   return (
     <div className="p-16">
       <h1 className="flex text-2xl font-semibold justify-center items-center">
-        Validators Table
+        NodeOperator Table
       </h1>
       <table className=" text-black  mt-4   mb-7 text-left">
         <tbody>
