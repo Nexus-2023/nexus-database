@@ -19,18 +19,37 @@ const pool = new Pool({
   password: process.env.DB_PASSWORD,
 })
 
-export async function GET(req, res) {
-  const client = new Client({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB_DATABASENAME,
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-  })
-  await client.connect()
+// export async function GET() {
+//   const client = await pool.connect()
+
+//   try {
+//     // Set the transaction isolation level to READ COMMITTED
+//     await client.query("BEGIN; SET TRANSACTION ISOLATION LEVEL READ COMMITTED;")
+
+//     const result = await client.query("SELECT * FROM VALIDATORS;")
+
+//     // Commit the transaction explicitly
+//     await client.query("COMMIT;")
+
+//     return NextResponse.json({ data: result.rows }, { status: 200 })
+//   } catch (error) {
+//     console.error("Error fetching data:", error)
+//     // Rollback the transaction in case of an error
+//     await client.query("ROLLBACK;")
+//     return NextResponse.json(
+//       { message: "Internal Error retrieving chats" },
+//       { status: 500 }
+//     )
+//   } finally {
+//     client.release()
+//   }
+// }
+
+export async function GET() {
+  const client = await pool.connect()
 
   try {
-    const result = await client.query("SELECT * FROM VALIDATORS ;")
+    const result = await client.query("SELECT * FROM VALIDATORS;")
 
     return NextResponse.json({ data: result.rows }, { status: 200 })
   } catch (error) {
@@ -40,7 +59,7 @@ export async function GET(req, res) {
       { status: 500 }
     )
   } finally {
-    await client.end()
+    client.release()
   }
 }
 

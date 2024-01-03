@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server"
 
 import { promises as fsPromises } from "fs"
-import { Client } from "pg"
+import { Client, Pool } from "pg"
 
-const client = new Client({
+const pool = new Pool({
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   database: process.env.DB_DATABASENAME,
@@ -12,7 +12,7 @@ const client = new Client({
 })
 
 export async function GET(req, res) {
-  await client.connect()
+  const client = await pool.connect()
 
   try {
     const result = await client.query("SELECT * FROM NODEOPERATORS;")
@@ -25,7 +25,7 @@ export async function GET(req, res) {
       { status: 500 }
     )
   } finally {
-    await client.end()
+    client.release()
   }
 }
 
