@@ -63,7 +63,9 @@ const BlocksTable = ({ list }) => {
                 {validator.block_number || "Null"}
               </td>
               <td className="text-left ">
-                {validator.validator_exit || "Null"}
+                {validator.validator_exit
+                  ? validator.validator_exit.join(", ")
+                  : "Null"}
               </td>
               <td className="text-left ">{validator.withdrawals || "Null"}</td>
 

@@ -16,7 +16,7 @@ export async function GET(req, res) {
 
   try {
     const result = await client.query("SELECT * FROM NODEOPERATORS;")
-    console.log("node result ", result)
+
     return NextResponse.json({ data: result.rows }, { status: 200 })
   } catch (error) {
     console.error("Error fetching data:", error)
