@@ -10,6 +10,9 @@ export default async function Home() {
   const validatorResult = await getValidators()
   const blocksResult = await getBlocks()
   const nodeResult = await getNodeOperators()
+  console.log(" validatorResult", validatorResult.data)
+  console.log("  blocksResult", blocksResult)
+  console.log(" nodeResult", nodeResult)
 
   return (
     <>
