@@ -12,10 +12,10 @@ const ValidatorTable = ({ list }) => {
             <th className="text-left text-white px-4">public_key</th>
             <th className="text-white px-4">validator_index</th>
             <th className="text-white px-4">cluster_id</th>
-            <th className="text-white px-4">balance</th>
+            <th className="text-white px-4">balance (ETH)</th>
             <th className="text-white px-4">status</th>
             <th className="text-white px-4">last_update_time</th>
-            <th className="text-white px-4">score</th>
+            <th className="text-white px-4">score %</th>
             <th className="text-white px-4">rollupname</th>
           </tr>
 
@@ -26,7 +26,12 @@ const ValidatorTable = ({ list }) => {
                 {validator.validator_index || "Null"}
               </td>
               <td className="text-left ">{validator.cluster_id || "Null"}</td>
-              <td className="text-left ">{validator.balance || "Null"}</td>
+
+              <td className="text-left ">
+                {validator.balance
+                  ? (parseFloat(validator.balance) / 1e9).toFixed(9)
+                  : "Null"}
+              </td>
               <td className="text-left ">{validator.status || "Null"}</td>
               <td className="text-left ">
                 {validator.last_update_time || "Null"}
@@ -92,7 +97,7 @@ const NodeOperatorsTable = ({ list }) => {
             <th className="text-white px-4">name</th>
             <th className="text-left text-white px-4">public_key</th>
             <th className="text-white px-4">validator_count</th>
-            <th className="text-white px-4">score</th>
+            <th className="text-white px-4">score %</th>
             <th className="text-white px-4">last_update_time</th>
             <th className="text-white px-4">node_operator_id</th>
             <th className="text-white px-4">cluster_id</th>
