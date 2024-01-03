@@ -14,4 +14,5 @@ npm run dev  # to start the application
 ```
 
 # Database Schema 
-![image](https://github.com/Nexus-2023/nexus-database/assets/42178214/2a50864c-f8d1-4c75-bf59-123b2a93529f)
+![image](https://github.com/Nexus-2023/nexus-database/assets/42178214/27efa55b-8905-41ce-a460-e24f7c582006)
+
