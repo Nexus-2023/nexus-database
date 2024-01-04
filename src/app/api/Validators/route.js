@@ -96,9 +96,9 @@ export async function POST(req, res) {
       { status: 200 }
     )
   } catch (error) {
-    console.error("Error fetching data:", error)
+    console.error("Error Validator failed to create:", error)
     return NextResponse.json(
-      { message: "Internal Error retrieving chats" },
+      { message: "Internal Validator failed to create" },
       { status: 500 }
     )
   } finally {

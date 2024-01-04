@@ -5,12 +5,16 @@ import {
   NodeOperatorsTable,
 } from "@/components/tables"
 import { getValidators, getBlocks, getNodeOperators } from "@/utils/apiCalls"
+import { startValidatorUpdateInterval, validatorUpdate } from "@/utils/database"
+import { useEffect, useState } from "react"
 
 export default async function Home() {
   const validatorResult = await getValidators()
-  const blocksResult = await getBlocks()
-  const nodeResult = await getNodeOperators()
-  console.log(" validatorResult", validatorResult)
+  await startValidatorUpdateInterval()
+  // const blocksResult = await getBlocks()
+  // const nodeResult = await getNodeOperators()
+  // const updateResult = await validatorUpdate()
+  // console.log(" validatorResult", validatorResult)
   // console.log("  blocksResult", blocksResult)
   // console.log(" nodeResult", nodeResult)
 
@@ -24,7 +28,7 @@ export default async function Home() {
         <>Fetching Validators ...</>
       )}
 
-      {blocksResult ? (
+      {/* {blocksResult ? (
         <>
           <BlocksTable list={blocksResult.data} />
         </>
@@ -38,7 +42,7 @@ export default async function Home() {
         </>
       ) : (
         <>Fetching nodeOperator Data ...</>
-      )}
+      )} */}
     </>
   )
 }

@@ -4,7 +4,8 @@ async function getValidators() {
   try {
     const response = await fetch("http://localhost:3000/api/Validators", {
       method: "GET",
-      cache: "no-cache",
+      cache: "no-store",
+      // next: { revalidate: 60 },
     })
 
     const result = await response.json()
@@ -15,11 +16,60 @@ async function getValidators() {
   }
 }
 
+async function postValidator({ validator }) {
+  try {
+    const response = await fetch("http://localhost:3000/api/Validators", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ validator }),
+    })
+
+    if (!response.ok) {
+      throw new Error("Failed to create validator.")
+    }
+
+    const data = await response.json()
+    // console.log(data.result)
+
+    return data
+  } catch (error) {
+    console.error("Error creating validator:", error)
+  }
+}
+
+async function updateValidator({ validator }) {
+  try {
+    const response = await fetch(
+      "http://localhost:3000/api/Validators/update",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ validator }),
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error("Failed to create validator.")
+    }
+
+    const data = await response.json()
+    // console.log(data.result)
+
+    return data
+  } catch (error) {
+    console.error("Error creating validator:", error)
+  }
+}
+
 async function getNodeOperators() {
   try {
     const response = await fetch("http://localhost:3000/api/Node", {
       method: "GET",
-      cache: "no-cache",
+      cache: "no-store",
     })
 
     const result = await response.json()
@@ -34,7 +84,7 @@ async function getBlocks() {
   try {
     const response = await fetch("http://localhost:3000/api/Blocks", {
       method: "GET",
-      cache: "no-cache",
+      cache: "no-store",
     })
 
     const result = await response.json()
@@ -45,4 +95,10 @@ async function getBlocks() {
   }
 }
 
-export { getBlocks, getNodeOperators, getValidators }
+export {
+  getBlocks,
+  getNodeOperators,
+  getValidators,
+  postValidator,
+  updateValidator,
+}
