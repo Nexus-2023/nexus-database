@@ -21,6 +21,7 @@ import {
 
 import { validatorInsert } from "@/utils/database"
 import { checkForValidatorSubgraphUpdates } from "@/utils/database"
+import { GET_ALL_ROLLUP } from "@/subGraphQueries"
 
 // dummy subgraph validator data
 // const subgraphResult = {
@@ -52,8 +53,33 @@ import { checkForValidatorSubgraphUpdates } from "@/utils/database"
 
 // Call the function to start monitoring for updates
 
+const query = gql`
+  query Now {
+    rollups {
+      bridgeContract
+      clusterId
+      executionRewards
+      id
+      name
+      nexusFeePercentage
+      slashing
+      stakingLimit
+      validatorCount
+    }
+  }
+`
+
 export default async function Home() {
-  const res = await checkForValidatorSubgraphUpdates()
+  const { data } = await getClient().query({ query })
+  // console.log("data rollup", data)
+  // const res = await checkForValidatorSubgraphUpdates()
+  return (
+    <>
+      {data && (
+        <pre className=" w-[100vw] p-16">{JSON.stringify(data, null, 2)}</pre>
+      )}
+    </>
+  )
 }
 
 // Check if there are validators in the subgraph result

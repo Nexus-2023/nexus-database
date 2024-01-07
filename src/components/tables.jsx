@@ -56,9 +56,14 @@ const BlocksTable = ({ list }) => {
         <tbody>
           <tr>
             <th className="text-left text-white px-4">block_number</th>
-            <th className="text-white px-4">validator_exit</th>
-            <th className="text-white px-4">withdrawals</th>
-
+            <th className="text-left text-white px-4">block_proposer</th>
+            <th className="text-left text-white px-4">slot</th>
+            <th className="text-left text-white px-4">root</th>
+            <th className="text-left text-white px-4">parent_root</th>
+            <th className="text-left text-white px-4">validator_exit</th>
+            <th className="text-left text-white px-4">withdrawls</th>
+            <th className="text-left text-white px-4">proposer_slashing</th>
+            <th className="text-left text-white px-4">finalized</th>
             <th className="text-white px-4">last_update_time</th>
           </tr>
 
@@ -67,12 +72,42 @@ const BlocksTable = ({ list }) => {
               <td className="text-left  ">
                 {validator.block_number || "Null"}
               </td>
+
+              <td className="text-left  ">
+                {validator.block_proposer || "Null"}
+              </td>
+
+              <td className="text-left  ">{validator.slot || "Null"}</td>
+
+              <td className="text-left  ">{validator.root || "Null"}</td>
+              <td className="text-left  ">{validator.parent_root || "Null"}</td>
+
+              <td className="text-left  ">
+                {validator.validator_exit || "Null"}
+              </td>
+
+              <td className="text-left  ">{validator.withdrawals || "Null"}</td>
+
+              <td className="text-left  ">
+                {validator.proposer_slashing || "Null"}
+              </td>
+
+              {validator.finalized ? (
+                <>
+                  <td className="text-left  text-green-600">True</td>
+                </>
+              ) : (
+                <>
+                  <td className="text-left  text-red-600">False</td>
+                </>
+              )}
+
+              {/* 
               <td className="text-left ">
                 {validator.validator_exit
                   ? validator.validator_exit.join(", ")
                   : "Null"}
-              </td>
-              <td className="text-left ">{validator.withdrawals || "Null"}</td>
+              </td> */}
 
               <td className="text-left ">
                 {validator.last_update_time || "Null"}

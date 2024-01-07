@@ -95,10 +95,58 @@ async function getBlocks() {
   }
 }
 
+async function postBlocks({ block }) {
+  try {
+    const response = await fetch("http://localhost:3000/api/Blocks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ block }),
+    })
+
+    if (!response.ok) {
+      throw new Error("Failed to create block.")
+    }
+
+    const data = await response.json()
+    // console.log(data.result)
+
+    return data
+  } catch (error) {
+    console.error("Error creating block:", error)
+  }
+}
+
+async function updateBlock({ updatedBlock }) {
+  try {
+    const response = await fetch("http://localhost:3000/api/Blocks/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ updatedBlock }),
+    })
+
+    if (!response.ok) {
+      throw new Error("Failed to update block.")
+    }
+
+    const data = await response.json()
+    // console.log(data.result)
+
+    return data
+  } catch (error) {
+    console.error("Error updating block:", error)
+  }
+}
+
 export {
   getBlocks,
   getNodeOperators,
   getValidators,
   postValidator,
   updateValidator,
+  postBlocks,
+  updateBlock,
 }

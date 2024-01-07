@@ -15,22 +15,27 @@ export async function POST(req, res) {
   const client = await pool.connect()
   try {
     const Data = await req.json()
-    // console.log("Data", Data.validator)
-    const { public_key, balance, status, score } = Data.validator
+    // console.log("Data", Data.block)
+    // const { public_key, balance, status, score } = Data.block
+    const {
+      block_number,
 
+      root,
+      finalized,
+    } = Data.block
     const result = await pool.query(
-      "UPDATE validators SET balance = $1, status = $2, score = $3 , last_update_time = NOW() WHERE public_key = $4 RETURNING *",
-      [balance, status, score, public_key]
+      "UPDATE blocks SET root = $1, finalized = $2, last_update_time = NOW() WHERE block_number = $4 RETURNING *",
+      [root, finalized, score, block_number]
     )
 
     return NextResponse.json(
-      { data: result.rows, result: "Validator Updated successfully" },
+      { data: result.rows, result: "block Updated successfully" },
       { status: 200 }
     )
   } catch (error) {
-    console.error("Error updating validator data:", error)
+    console.error("Error updating block data:", error)
     return NextResponse.json(
-      { message: "Internal Error updating validator" },
+      { message: "Internal Error updating block" },
       { status: 500 }
     )
   } finally {

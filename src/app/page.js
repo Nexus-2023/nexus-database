@@ -7,23 +7,29 @@ import {
   NodeOperatorsTable,
 } from "@/components/tables"
 import { getBlocks, getNodeOperators, getValidators } from "@/utils/apiCalls"
-// import { startValidatorUpdateInterval, validatorUpdate } from "@/utils/database"
 
 import { useEffect, useState } from "react"
 
 export default function Home() {
   const [validators, setValidators] = useState([])
+  const [nodeOperators, setNodeOperators] = useState([])
+  const [blocks, setBlocks] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedData = await getValidators()
+        const validater = await getValidators()
+        const node = await getNodeOperators()
+        const block = await getBlocks()
 
-        console.log("fetchedData", fetchedData)
+        // console.log("node", node)
+        // console.log("block", block)
 
-        setValidators(fetchedData.data)
+        setValidators(validater.data)
+        setNodeOperators(node.data)
+        setBlocks(block.data)
       } catch (error) {
         setError(error.message)
       }
@@ -32,20 +38,11 @@ export default function Home() {
     fetchData() // Initial fetch
 
     // Set up interval for subsequent fetches
-    const intervalId = setInterval(fetchData, 5000)
-    // console.log("data", data)
+    const intervalId = setInterval(fetchData, 60000)
+
     // Cleanup function to clear the interval
     return () => clearInterval(intervalId)
   }, [])
-
-  // const validatorResult = await getValidators()
-  // await startValidatorUpdateInterval()
-  // const blocksResult = await getBlocks()
-  // const nodeResult = await getNodeOperators()
-  // const updateResult = await validatorUpdate()
-  // console.log(" validatorResult", validatorResult)
-  // console.log("  blocksResult", blocksResult)
-  // console.log(" nodeResult", nodeResult)
 
   return (
     <>
@@ -55,21 +52,21 @@ export default function Home() {
         <>Fetching Validators ...</>
       )}
 
-      {/* {blocksResult ? (
+      {blocks ? (
         <>
-          <BlocksTable list={blocksResult.data} />
+          <BlocksTable list={blocks} />
         </>
       ) : (
         <>Fetching BlockData ...</>
       )}
 
-      {nodeResult ? (
+      {nodeOperators ? (
         <>
-          <NodeOperatorsTable list={nodeResult.data} />
+          <NodeOperatorsTable list={nodeOperators} />
         </>
       ) : (
         <>Fetching nodeOperator Data ...</>
-      )} */}
+      )}
     </>
   )
 }

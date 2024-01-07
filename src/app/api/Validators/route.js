@@ -67,7 +67,7 @@ export async function POST(req, res) {
   const client = await pool.connect()
   try {
     const Data = await req.json()
-    console.log("Data", Data.validator)
+    // console.log("Data", Data.validator)
     const {
       public_key,
       validator_index,

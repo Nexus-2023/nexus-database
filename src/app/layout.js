@@ -1,7 +1,13 @@
 import "./globals.css"
 import { Inter } from "next/font/google"
-import { startValidatorUpdateInterval, validatorUpdate } from "@/utils/database"
+import {
+  startValidatorUpdateInterval,
+  validatorUpdate,
+  checkForValidatorSubgraphUpdates,
+  BlockInsert,
+} from "@/utils/database"
 
+import { getBlocks, getNodeOperators, getValidators } from "@/utils/apiCalls"
 const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "NexusDatabase",
@@ -10,6 +16,8 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   await startValidatorUpdateInterval()
+  await BlockInsert()
+
   return (
     <html lang="en">
       <body>{children}</body>
