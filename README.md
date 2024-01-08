@@ -171,5 +171,60 @@ The `NodeOperatorsTable` component renders a table to display information about 
 - `cluster_id`
 
 
+## App Folder (starting folder)
+
+The `App` folder contains routing for the pages and layout of the application. It displays 
+
+Structure
+- `layout.js`: Defines the root layout for the application, including global styles and metadata.
+- `page.js`: The main page component, responsible for fetching and displaying data in tables.
+- `global.css`: Contains global CSS styles for the application.
+
+ /Api:
+
+- `Blocks`: Routes for interacting with block data (e.g., fetching, updating).
+- `Node`: Routes for interacting with node operator data.
+- `Validators`: Routes for interacting with validator data (e.g., fetching, updating).
+
+ /graphql:
+
+- `page.js`: A GraphQL page that fetches and displays rollup data.
+
+
+## App/API
+
+contains the api endpoint to call fron the client . using { pg } npm package to interact with the postgres database
+
+### Validator 
+
+- `route.js` : This file defines two API routes to manage validator data:
+   - `GET` /api/validator: Retrieves all validator data from the postgres database.
+   - `POST` /api/validator: Inserts a new validator record in the postgres database.
+
+ - `update\route.js` 
+   - `POST` /api/validator: Update existing validators in the postgres database.
+
+
+### Blocks
+
+- `route.js` : This file defines two API routes to manage Blocks data:
+   - `GET` /api/Blocks: Retrieves all Blocks data from the postgres database.
+   - `POST` /api/Blocks: Inserts a new Block record in the postgres database.
+
+ - `update\route.js` 
+   - `POST` /api/Blocks: Update two columns of existing Block data (root , finality) in the postgres database.
+  
+
+ 
+### Node 
+
+- `route.js` : This file defines two API routes to manage Node operator data:
+   - `GET` /api/Node: Retrieves all NodeOperator data from the postgres database.
+ 
+
+ 
+  
+     
+     
 
 
