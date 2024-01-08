@@ -178,6 +178,8 @@ async function BlockInsert() {
 
     // console.log("existingValidators", existingValidators)
 
+    // query from databse instead of using for loop
+
     for (const existingValidator of existingValidators) {
       // console.log(
       //   "existingValidator.validator_index",

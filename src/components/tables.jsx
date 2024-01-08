@@ -79,8 +79,19 @@ const BlocksTable = ({ list }) => {
 
               <td className="text-left  ">{validator.slot || "Null"}</td>
 
-              <td className="text-left  ">{validator.root || "Null"}</td>
-              <td className="text-left  ">{validator.parent_root || "Null"}</td>
+              <td
+                className="text-left   max-w-64  overflow-hidden  text-ellipsis  hover:text-blue-700 hover:cursor-pointer"
+                title={validator.root}
+              >
+                0x{validator.root || "Null"}
+              </td>
+
+              <td
+                className="text-left   max-w-64  overflow-hidden  text-ellipsis hover:text-blue-700 hover:cursor-pointer"
+                title={validator.parent_root}
+              >
+                0x{validator.parent_root || "Null"}
+              </td>
 
               <td className="text-left  ">
                 {validator.validator_exit || "Null"}

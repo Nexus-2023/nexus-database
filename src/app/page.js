@@ -45,7 +45,7 @@ export default function Home() {
   }, [])
 
   return (
-    <>
+    <div className=" flex justify-center flex-col  items-center">
       {validators ? (
         <ValidatorTable list={validators} />
       ) : (
@@ -67,6 +67,6 @@ export default function Home() {
       ) : (
         <>Fetching nodeOperator Data ...</>
       )}
-    </>
+    </div>
   )
 }

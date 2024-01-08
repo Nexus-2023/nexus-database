@@ -1,5 +1,3 @@
-import { Login } from "@mui/icons-material"
-
 async function getValidators() {
   try {
     const response = await fetch("http://localhost:3000/api/Validators", {
